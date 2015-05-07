@@ -99,6 +99,16 @@ public class Trigger {
         }
     }
 
+    public boolean isScheduled(String tag) {
+        if (triggerBinder == null && pendingList.containsKey(tag)) {
+            return true;
+        } else if (triggerBinder.isScheduled(tag)) {
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * Cancel a Job with given tag, if the job is in the pending list, it can be cancelled.
      * If the job's action is in progress, this can not help you.

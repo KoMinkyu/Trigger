@@ -271,6 +271,10 @@ public final class TriggerLoop extends Service {
         }
     }
 
+    boolean isContainingJob(String tag) {
+        return jobSet.containsKey(tag);
+    }
+
     void removeJob(String tag) {
         ArrayList<String> tobeRemoved = new ArrayList<>();
         for (String key : jobSet.keySet()) {
@@ -392,6 +396,10 @@ public final class TriggerLoop extends Service {
     protected class TriggerBinder extends Binder {
         void schedule(Job job) {
             addJob(job, true);
+        }
+
+        boolean isScheduled(String tag) {
+            return isContainingJob(tag);
         }
 
         void cancel(String tag) {
